@@ -1,0 +1,61 @@
+/* WordPress wrappers only. The mock's main.css owns colours, fonts and layout. */
+body { overflow-wrap: anywhere; }
+.site-header { padding-right: 0; gap: 24px; }
+.site-header nav { flex-shrink: 0; }
+.site-header nav a { display: inline-flex; align-items: center; min-height: 48px; }
+.review-notice { margin: 0; padding: 12px 24px; background: #fff1c9; color: #614718; font-size: 16px; text-align: center; }
+.screen-reader-text { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px solid #165da0; outline-offset: 5px; }
+.lp-photo { --photo-ratio: 4 / 3; position: relative; width: 100%; margin: 0; aspect-ratio: var(--photo-ratio); overflow: hidden; background: #e9e7dc; }
+.ratio-16-9 { --photo-ratio: 16 / 9; }
+.ratio-3-2 { --photo-ratio: 3 / 2; }
+.ratio-1-1 { --photo-ratio: 1; }
+.lp-photo img, .photo-placeholder { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+.photo-placeholder { display: grid; place-items: center; padding: 28px; color: #65594c; background: linear-gradient(140deg, #f4eddf, #e0e9de); text-align: center; font-size: 18px; }
+/* Fill the original visual column; an attachment's intrinsic size must not size the column. */
+.hero-visual > .lp-photo, .younger-photo > .lp-photo { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; }
+.hero-visual::after { pointer-events: none; }
+.hero-copy { min-width: 0; }
+.hero h1 > span { display: block; }
+.instructor-photo { width: 100%; min-width: 0; }
+.instructor-photo > .lp-photo { border-radius: var(--radius); }
+.method-card > .lp-photo { border-radius: 0; }
+#saturdayMethods { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.button { text-align: center; }
+.campaign { max-width: 100%; }
+.price-card strong { font-size: 44px; }
+.price-options { flex-wrap: wrap; }
+.class-row { margin-bottom: 14px; }
+.class-row h4 { margin: 0 0 3px; font-size: 19px; }
+.class-venue { font-weight: 700; }
+.venue-card a { min-height: 48px; }
+.faq-item summary { display: grid; grid-template-columns: 40px 1fr 30px; align-items: center; padding: 17px 18px; cursor: pointer; font-weight: 700; min-height: 60px; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: 'Q'; color: var(--primary); font-family: var(--font-display); font-size: 24px; }
+.faq-item summary::after { content: '＋'; color: var(--primary); font-size: 24px; text-align: center; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item[open] .faq-answer { display: block; }
+.trial-card h3 { margin: 0 0 18px; font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.4; }
+.trial-card .campaign { width: 100%; text-align: left; }
+.trial-standard-price { font-weight: 700; }
+.line-qr { width: min(240px, 100%); margin: 24px auto; }
+.line-qr img { object-fit: contain; background: #fff; }
+.line-qr .image-note { position: static; display: block; }
+.line-qr .lp-photo { overflow: visible; }
+/* Keep explanatory body copy at the instructed 16px minimum. */
+.method-card p,.class-row p,.faq-answer,.price-card ul,.soft-note,.qualification-row,.venue-card p,.saturday-method span,.trial-card > p { font-size: 16px; }
+.standard-content { min-height: 60vh; max-width: 1100px; margin: auto; padding: 64px 24px; }
+.entry-content img { height: auto; }
+.entry-content { font-size: 18px; }
+.entry-content > * { max-width: 100%; }
+@media (max-width: 980px) {
+  #saturdayMethods { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .method-card > .lp-photo { height: 100%; }
+}
+@media (max-width: 640px) {
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+  #saturdayMethods { grid-template-columns: 1fr; }
+  .faq-item summary { grid-template-columns: 32px 1fr 24px; padding: 15px 12px; }
+  .hero-copy > .button { padding-left: 12px; padding-right: 12px; }
+}
+.hero h1 > span { white-space: pre-line; }

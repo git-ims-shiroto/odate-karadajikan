@@ -1,0 +1,9 @@
+.ok-settings { max-width: 1050px; }
+.ok-section { margin: 16px 0; padding: 18px; border: 1px solid #c3c4c7; background: #fff; }
+.ok-section > summary { cursor: pointer; font-size: 18px; font-weight: 600; padding: 8px; }
+.ok-group { margin: 18px 0; padding: 16px; border: 1px solid #ddd; }
+.ok-group legend { font-weight: 600; }
+.ok-field { margin: 18px 0; }
+.ok-field > label { display: block; margin-bottom: 6px; font-weight: 600; }
+.ok-media { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ok-media input { width: 90px; }
