@@ -20,12 +20,8 @@ permissions:
   contents: read
 
 env:
-  # --- 要確認：サーバー側の設定に合わせて変更する ---
-  # FTP ログイン後のルートから見た、テーマの設置先。末尾は / で終わらせる。
-  # このサーバーは、ログイン直後に public_html が見える構成（FileZilla で確認済み）。
+  # テーマの設置先（FTP 上の絶対パス。エックスサーバー：/ドメイン/public_html/...）。
   SERVER_DIR: /xs969605.xsrv.jp/public_html/wp-content/themes/odate-karada/
-  # ftps（FTP over TLS・推奨）/ ftp（暗号化なし）。サーバーが FTPS 非対応なら ftp に変更。
-  FTP_PROTOCOL: ftps
 
 jobs:
   deploy:
@@ -35,21 +31,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy theme via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.OODATE_SECRET_HOST }}
-          username: ${{ secrets.OODATE_SECRET_USER }}
-          password: ${{ secrets.OODATE_SECRET_PASS }}
-          protocol: ${{ env.FTP_PROTOCOL }}
-          local-dir: ./wordpress/odate-karada/
-          server-dir: ${{ env.SERVER_DIR }}
-          # 変更のあったファイルだけ送る（差分管理）。サーバー側の余計なファイルは消さない。
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.DS_Store
-            **/Thumbs.db
-            **/README.md
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      # FTPS（FTP over TLS）で接続し、テーマフォルダーをサーバーへミラーする。
+      # 既存ファイルは上書き。サーバーにだけあるファイルは削除しない（--delete を付けていない）。
+      - name: Deploy theme via FTPS (lftp mirror)
+        env:
+          FTP_HOST: ${{ secrets.OODATE_SECRET_HOST }}
+          FTP_USER: ${{ secrets.OODATE_SECRET_USER }}
+          LFTP_PASSWORD: ${{ secrets.OODATE_SECRET_PASS }}
+        run: |
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set net:max-retries 2;
+            set net:timeout 30;
+            open --env-password -u \"$FTP_USER\" \"$FTP_HOST\";
+            mirror --reverse --verbose --no-perms --parallel=4 \
+              --exclude-glob .git* \
+              --exclude-glob .DS_Store \
+              --exclude-glob Thumbs.db \
+              --exclude-glob README.md \
+              ./wordpress/odate-karada/ \"$SERVER_DIR\"
+          "
