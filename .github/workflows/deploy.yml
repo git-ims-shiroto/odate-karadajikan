@@ -47,11 +47,16 @@ jobs:
           lftp -c "
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
+            set ftp:passive-mode true;
+            set ftp:prefer-epsv false;
             set net:max-retries 2;
             set net:timeout 30;
             open --env-password -u \"$FTP_USER\" \"$FTP_HOST\";
-            echo '--- ログイン直後の場所と一覧（設置先確認用）---';
-            pwd;
+            echo '--- 調査用：サーバーとのやり取りを表示（パスワードは lftp が伏せる）---';
+            debug 3;
+            quote PWD;
+            quote STAT /;
+            quote STAT /public_html;
             cls -1;
             mirror --reverse --verbose --no-perms --parallel=4 \
               --exclude-glob .git* \
