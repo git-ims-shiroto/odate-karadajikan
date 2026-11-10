@@ -21,7 +21,7 @@ permissions:
 
 env:
   # テーマの設置先（FTP 上の絶対パス。エックスサーバー：/ドメイン/public_html/...）。
-  SERVER_DIR: /xs969605.xsrv.jp/public_html/wp-content/themes/odate-karada/
+  SERVER_DIR: /odate-karadajikan.com/public_html/wp-content/themes/odate-karada/
 
 jobs:
   deploy:
