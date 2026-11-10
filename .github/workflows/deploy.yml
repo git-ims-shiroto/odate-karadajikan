@@ -20,10 +20,10 @@ permissions:
   contents: read
 
 env:
-  # テーマの設置先。FTP アカウントは odate-karadajikan.com の追加アカウントで、
-  # 接続先ディレクトリ（ドメインフォルダー）が「/」に見えるため、ここからのパスを書く。
+  # テーマの設置先。デプロイ用の追加 FTP アカウントは、接続先ディレクトリを
+  # テーマフォルダー（.../public_html/wp-content/themes/odate-karada/）に限定しているため「/」。
   # サーバーパネルの「接続先ディレクトリ」を変えた場合は、ここも合わせて直す。
-  SERVER_DIR: /public_html/wp-content/themes/odate-karada/
+  SERVER_DIR: /
 
 jobs:
   deploy:
@@ -52,12 +52,6 @@ jobs:
             set net:max-retries 2;
             set net:timeout 30;
             open --env-password -u \"$FTP_USER\" \"$FTP_HOST\";
-            echo '--- 調査用：サーバーとのやり取りを表示（パスワードは lftp が伏せる）---';
-            debug 3;
-            quote PWD;
-            quote STAT /;
-            quote STAT /public_html;
-            cls -1;
             mirror --reverse --verbose --no-perms --parallel=4 \
               --exclude-glob .git* \
               --exclude-glob .DS_Store \
