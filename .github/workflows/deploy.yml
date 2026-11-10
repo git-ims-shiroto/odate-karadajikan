@@ -1,0 +1,56 @@
+name: Deploy theme to server
+
+# main ブランチへの push で、WordPress テーマ（wordpress/odate-karada/）だけをサーバーへ送る。
+# 手動実行（Actions タブの "Run workflow"）も可能。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "wordpress/odate-karada/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+# 同時に2つのデプロイが走らないようにする
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  # --- 要確認：サーバー側の設定に合わせて変更する ---
+  # FTP ログイン後のルートから見た、テーマの設置先。末尾は / で終わらせる。
+  # 例）ログイン先が WordPress のルートなら ./wp-content/themes/odate-karada/
+  #     ログイン先が public_html の外なら ./public_html/wp-content/themes/odate-karada/
+  SERVER_DIR: ./wp-content/themes/odate-karada/
+  # ftps（FTP over TLS・推奨）/ ftp（暗号化なし）。サーバーが FTPS 非対応なら ftp に変更。
+  FTP_PROTOCOL: ftps
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy theme via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.OODATE_SECRET_HOST }}
+          username: ${{ secrets.OODATE_SECRET_USER }}
+          password: ${{ secrets.OODATE_SECRET_PASS }}
+          protocol: ${{ env.FTP_PROTOCOL }}
+          local-dir: ./wordpress/odate-karada/
+          server-dir: ${{ env.SERVER_DIR }}
+          # 変更のあったファイルだけ送る（差分管理）。サーバー側の余計なファイルは消さない。
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/Thumbs.db
+            **/README.md
