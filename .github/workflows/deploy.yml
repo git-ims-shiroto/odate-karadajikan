@@ -22,9 +22,8 @@ permissions:
 env:
   # --- 要確認：サーバー側の設定に合わせて変更する ---
   # FTP ログイン後のルートから見た、テーマの設置先。末尾は / で終わらせる。
-  # 例）ログイン先が WordPress のルートなら ./wp-content/themes/odate-karada/
-  #     ログイン先が public_html の外なら ./public_html/wp-content/themes/odate-karada/
-  SERVER_DIR: ./wp-content/themes/odate-karada/
+  # このサーバーは、ログイン直後に public_html が見える構成（FileZilla で確認済み）。
+  SERVER_DIR: ./public_html/wp-content/themes/odate-karada/
   # ftps（FTP over TLS・推奨）/ ftp（暗号化なし）。サーバーが FTPS 非対応なら ftp に変更。
   FTP_PROTOCOL: ftps
 
