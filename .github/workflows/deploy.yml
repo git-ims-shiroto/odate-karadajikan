@@ -48,6 +48,9 @@ jobs:
             set net:max-retries 2;
             set net:timeout 30;
             open --env-password -u \"$FTP_USER\" \"$FTP_HOST\";
+            echo '--- ログイン直後の場所と一覧（設置先確認用）---';
+            pwd;
+            cls -1;
             mirror --reverse --verbose --no-perms --parallel=4 \
               --exclude-glob .git* \
               --exclude-glob .DS_Store \
