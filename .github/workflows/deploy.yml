@@ -20,8 +20,10 @@ permissions:
   contents: read
 
 env:
-  # テーマの設置先（FTP 上の絶対パス。エックスサーバー：/ドメイン/public_html/...）。
-  SERVER_DIR: /odate-karadajikan.com/public_html/wp-content/themes/odate-karada/
+  # テーマの設置先。FTP アカウントは odate-karadajikan.com の追加アカウントで、
+  # 接続先ディレクトリ（ドメインフォルダー）が「/」に見えるため、ここからのパスを書く。
+  # サーバーパネルの「接続先ディレクトリ」を変えた場合は、ここも合わせて直す。
+  SERVER_DIR: /public_html/wp-content/themes/odate-karada/
 
 jobs:
   deploy:
