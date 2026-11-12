@@ -318,3 +318,19 @@ body.modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* 背景の葉のイラスト（装飾）。文字の少ない余白に置き、内容より後ろに表示する。 */
+.section-for, .section-lessons, .section-voices, .section-instructor, .section-schedule { position: relative; isolation: isolate; overflow: clip; }
+.section-for::before, .section-lessons::after, .section-voices::before, .section-instructor::after, .section-schedule::before { position: absolute; z-index: -1; width: 150px; aspect-ratio: 420 / 816; content: ""; background: url("../images/leaf.webp") center / contain no-repeat; opacity: .55; pointer-events: none; }
+.section-for::before { top: 40px; left: 5%; transform: rotate(-28deg); }
+.section-lessons::after { top: 36px; right: 5%; width: 170px; transform: scaleX(-1) rotate(-22deg); }
+.section-voices::before { top: 30px; left: 6%; width: 120px; transform: rotate(18deg); }
+.section-instructor::after { right: 3%; bottom: 24px; width: 130px; transform: scaleX(-1) rotate(32deg); }
+.section-schedule::before { top: 40px; right: 6%; width: 140px; transform: rotate(24deg); }
+@media (max-width: 640px) {
+  .section-for::before, .section-lessons::after, .section-voices::before, .section-instructor::after, .section-schedule::before { width: 78px; opacity: .45; }
+  .section-for::before { top: 18px; left: 2%; }
+  .section-lessons::after { top: 14px; right: 2%; }
+  .section-schedule::before { top: 18px; right: 2%; }
+  .section-voices::before, .section-instructor::after { display: none; }
+}
