@@ -7,3 +7,7 @@
 .ok-field > label { display: block; margin-bottom: 6px; font-weight: 600; }
 .ok-media { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ok-media input { width: 90px; }
+.ok-repeat-item { margin: 12px 0; padding: 4px 16px 8px; border: 1px solid #ddd; border-left: 4px solid #ef6c39; background: #fcfcfc; }
+.ok-repeat-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 10px; }
+.ok-repeat-actions { display: flex; gap: 6px; }
+.ok-repeat-item .ok-field { margin: 12px 0; }

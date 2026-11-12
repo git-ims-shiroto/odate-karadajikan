@@ -55,9 +55,26 @@
     document.body.classList.remove("modal-open");
   });
 
-  $("#voicesGrid").innerHTML = content.voices.map((item) => `
-    <article class="voice-card"><div class="voice-person"><span class="voice-avatar" aria-hidden="true">${escapeHtml(item.age.slice(-3, -2))}</span><div><b>${escapeHtml(item.age)}</b><span>${escapeHtml(item.tag)}</span></div></div><blockquote>${escapeHtml(item.quote)}</blockquote></article>
-  `).join("");
+  // 参加者の声：最初の3件を表示し、残りは「もっと見る」のドロワーで全件を表示する
+  const VOICE_LIMIT = 3;
+  const voiceInitial = (age) => String(age).split(" ").pop().charAt(0);
+  const voiceCard = (item) => `
+    <article class="voice-card"><div class="voice-person"><span class="voice-avatar" aria-hidden="true">${escapeHtml(voiceInitial(item.age))}</span><div><b>${escapeHtml(item.age)}</b><span>${escapeHtml(item.tag)}</span></div></div><blockquote>${escapeHtml(item.quote)}</blockquote></article>
+  `;
+  $("#voicesGrid").innerHTML = content.voices.slice(0, VOICE_LIMIT).map(voiceCard).join("");
+  const voiceDrawer = $("#voiceDrawer");
+  if (content.voices.length > VOICE_LIMIT) {
+    $("#voiceDrawerList").innerHTML = content.voices.map(voiceCard).join("");
+    $("#voiceMoreCount").textContent = `（全${content.voices.length}件）`;
+    $("#voiceMore").hidden = false;
+    $("#voiceMoreButton").addEventListener("click", () => {
+      document.body.classList.add("modal-open");
+      voiceDrawer.showModal();
+    });
+    $("#voiceDrawerClose").addEventListener("click", () => voiceDrawer.close());
+    voiceDrawer.addEventListener("click", (event) => { if (event.target === voiceDrawer) voiceDrawer.close(); });
+    voiceDrawer.addEventListener("close", () => document.body.classList.remove("modal-open"));
+  }
 
   $("#qualificationsList").innerHTML = content.qualifications.map((item) => `
     <div class="qualification-row"><b>${escapeHtml(item.org)}</b><span>${escapeHtml(item.items)}</span></div>

@@ -8,9 +8,33 @@ function ok_lp_defaults() {
     }
     return $defaults;
 }
+/** 管理画面で件数を増減できる一覧（[セクション, 項目]）。 */
+function ok_lp_dynamic_lists() {
+    return [ [ 'voices', 'items' ] ];
+}
+/** 動的な一覧の1件分の空の雛形（初期値の1件目と同じ項目を持つ）。 */
+function ok_lp_list_template( $section, $key ) {
+    $first = ok_lp_defaults()[$section][$key][0] ?? [];
+    return array_map( function ( $value ) { return is_bool( $value ) ? false : ''; }, $first );
+}
+/** 1件分を雛形の項目にそろえる（不要な項目は捨て、足りない項目は空にする）。 */
+function ok_lp_normalize_item( $item, $template ) {
+    return array_replace( $template, array_intersect_key( is_array( $item ) ? $item : [], $template ) );
+}
 function ok_lp_content() {
     $saved = get_option( 'ok_lp_content', [] );
-    return array_replace_recursive( ok_lp_defaults(), is_array( $saved ) ? $saved : [] );
+    $saved = is_array( $saved ) ? $saved : [];
+    $data = array_replace_recursive( ok_lp_defaults(), $saved );
+    // 動的な一覧は、保存済みの件数をそのまま使う（初期値の件数と混ぜない）。
+    foreach ( ok_lp_dynamic_lists() as [ $section, $key ] ) {
+        if ( isset( $saved[$section][$key] ) && is_array( $saved[$section][$key] ) ) {
+            $template = ok_lp_list_template( $section, $key );
+            $data[$section][$key] = array_values( array_map( function ( $item ) use ( $template ) {
+                return ok_lp_normalize_item( $item, $template );
+            }, $saved[$section][$key] ) );
+        }
+    }
+    return $data;
 }
 function ok_lp_is_landing() {
     return is_front_page() || is_page_template( 'page-lp.php' );
@@ -125,7 +149,23 @@ function ok_lp_trial_price() {
  * 画像の選択（代替テキストを含む）・公式LINE・キャンペーンの表示有無は引き継ぐ。
  * 置き換え前の設定は ok_lp_content_backup_1_0 に保存する。
  */
-const OK_LP_CONTENT_VERSION = '1.1.0';
+const OK_LP_CONTENT_VERSION = '1.2.0';
+/**
+ * 1.2.0：参加者の声がサンプルのまま（未編集）なら、実際の感想に置き換え、サンプルの注記を消す。
+ * 管理画面で書き換え済みの感想には触れない。
+ */
+function ok_lp_migrate_voices( $saved ) {
+    $items = $saved['voices']['items'] ?? [];
+    $first = is_array( $items ) && isset( $items[0]['quote'] ) ? (string) $items[0]['quote'] : '';
+    if ( 0 === strpos( $first, '身体を動かすのが久しぶりで不安でしたが' ) ) {
+        $saved['voices']['items'] = ok_lp_defaults()['voices']['items'];
+    }
+    $note = (string) ( $saved['voices']['note'] ?? '' );
+    if ( false !== strpos( $note, 'サンプル' ) ) {
+        $saved['voices']['note'] = '';
+    }
+    return $saved;
+}
 function ok_lp_carry_settings( $defaults, $saved ) {
     if ( ! is_array( $defaults ) || ! is_array( $saved ) ) {
         return $defaults;
@@ -147,13 +187,20 @@ function ok_lp_carry_settings( $defaults, $saved ) {
     return $defaults;
 }
 add_action( 'init', function () {
-    if ( OK_LP_CONTENT_VERSION === get_option( 'ok_lp_content_version' ) ) {
+    $version = (string) get_option( 'ok_lp_content_version', '0' );
+    if ( OK_LP_CONTENT_VERSION === $version ) {
         return;
     }
     $saved = get_option( 'ok_lp_content', null );
     if ( is_array( $saved ) ) {
-        add_option( 'ok_lp_content_backup_1_0', $saved, '', false );
-        update_option( 'ok_lp_content', ok_lp_carry_settings( ok_lp_defaults(), $saved ) );
+        if ( version_compare( $version, '1.1.0', '<' ) ) {
+            add_option( 'ok_lp_content_backup_1_0', $saved, '', false );
+            $saved = ok_lp_carry_settings( ok_lp_defaults(), $saved );
+        }
+        if ( version_compare( $version, '1.2.0', '<' ) ) {
+            $saved = ok_lp_migrate_voices( $saved );
+        }
+        update_option( 'ok_lp_content', $saved );
     }
     update_option( 'ok_lp_content_version', OK_LP_CONTENT_VERSION );
 } );

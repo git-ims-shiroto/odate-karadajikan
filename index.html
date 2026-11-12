@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#f47b42" />
     <title>大館からだ時間｜大館市のやさしい体操教室</title>
     <link rel="icon" href="sample-assets/common_favicon.png" />
-    <link rel="stylesheet" href="styles.css?v=20261112-2" />
+    <link rel="stylesheet" href="styles.css?v=20261112-3" />
   </head>
   <body>
     <a class="skip-link" href="#main">本文へ移動</a>
@@ -110,9 +110,10 @@
         <div class="section-heading">
           <p class="section-kicker">VOICE</p>
           <h2 id="voices-title">参加されている方の声</h2>
-          <p class="sample-warning">※以下は構成確認のためのサンプル文章です。実際の感想に差し替えます。</p>
+          
         </div>
         <div class="voice-grid" id="voicesGrid"></div>
+        <div class="voice-more" id="voiceMore" hidden><button class="button button-outline" id="voiceMoreButton" type="button" aria-haspopup="dialog" aria-controls="voiceDrawer">もっと見る<span id="voiceMoreCount"></span></button></div>
         <p class="personal-note">※個人の感想です。感じ方には個人差があります。</p>
       </section>
 
@@ -196,6 +197,17 @@
     <div class="mobile-cta"><a class="button button-line" href="#trial"><span aria-hidden="true">●</span> LINEで体験を申し込む</a></div>
     <div class="toast" id="toast" role="status" aria-live="polite">公式LINEは準備中です</div>
 
+    <dialog class="voice-drawer" id="voiceDrawer" aria-labelledby="voiceDrawerTitle">
+      <div class="voice-drawer-panel">
+        <header class="voice-drawer-header">
+          <strong id="voiceDrawerTitle">参加されている方の声</strong>
+          <button id="voiceDrawerClose" type="button" aria-label="閉じる">×</button>
+        </header>
+        <div class="voice-drawer-list" id="voiceDrawerList"></div>
+        <p class="voice-drawer-note">※個人の感想です。感じ方には個人差があります。</p>
+      </div>
+    </dialog>
+
     <dialog class="site-modal" id="siteModal" aria-labelledby="siteModalTitle">
       <div class="site-modal-panel">
         <header class="site-modal-header">
@@ -210,7 +222,7 @@
       </div>
     </dialog>
 
-    <script src="content.js?v=20261023-1"></script>
-    <script src="script.js?v=20261023-2"></script>
+    <script src="content.js?v=20261112-1"></script>
+    <script src="script.js?v=20261112-1"></script>
   </body>
 </html>

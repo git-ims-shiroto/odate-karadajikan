@@ -40,7 +40,41 @@ function ok_lp_sanitize_tree( $input, $defaults, $key = '' ) {
 }
 function ok_lp_sanitize( $input ) {
     // Retain existing values on partial submissions; reject unknown keys.
-    return ok_lp_sanitize_tree( $input, ok_lp_content() );
+    $result = ok_lp_sanitize_tree( $input, ok_lp_content() );
+    // 動的な一覧：そのセクションが送信されたときは、送信された件数・順番をそのまま使う（0件も可）。
+    foreach ( ok_lp_dynamic_lists() as [ $section, $key ] ) {
+        if ( ! is_array( $input ) || ! isset( $input[$section] ) || ! is_array( $input[$section] ) ) {
+            continue;
+        }
+        $template = ok_lp_list_template( $section, $key );
+        $list = [];
+        foreach ( array_slice( (array) ( $input[$section][$key] ?? [] ), 0, 50 ) as $item ) {
+            $clean = ok_lp_sanitize_tree( ok_lp_normalize_item( $item, $template ), $template );
+            if ( '' !== trim( implode( '', array_filter( $clean, 'is_string' ) ) ) ) {
+                $list[] = $clean;
+            }
+        }
+        $result[$section][$key] = $list;
+    }
+    return $result;
+}
+/** 動的な一覧の1件分（見出し・並べ替え・削除ボタン付き）。 */
+function ok_lp_repeat_item( $item, $path, $index, $number ) {
+    echo '<div class="ok-repeat-item"><div class="ok-repeat-head"><strong class="ok-repeat-title">' . esc_html( $number ) . '件目</strong>';
+    echo '<span class="ok-repeat-actions"><button type="button" class="button ok-move-up" aria-label="上へ移動">↑</button><button type="button" class="button ok-move-down" aria-label="下へ移動">↓</button><button type="button" class="button button-link-delete ok-remove-item">削除</button></span></div>';
+    ok_lp_setting_fields( $item, $path . '[' . $index . ']' );
+    echo '</div>';
+}
+/** 件数を増減できる一覧の入力欄。 */
+function ok_lp_repeater( $values, $path, $section, $key ) {
+    echo '<fieldset class="ok-group ok-repeater"><legend>' . esc_html( 'voices' === $section ? '参加者の声（先頭3件を表示し、4件目以降は「もっと見る」で表示）' : '一覧' ) . '</legend><div class="ok-repeat-list">';
+    foreach ( array_values( $values ) as $i => $item ) {
+        ok_lp_repeat_item( $item, $path, $i, $i + 1 );
+    }
+    echo '</div><template class="ok-repeat-template">';
+    ok_lp_repeat_item( ok_lp_list_template( $section, $key ), $path, '__INDEX__', '' );
+    echo '</template><p><button type="button" class="button button-secondary ok-add-item">＋ 1件追加</button></p>';
+    echo '<p class="description">↑↓で表示順を変えられます。追加・削除・並べ替えは「LP設定を保存」で反映されます。</p></fieldset>';
 }
 add_action( 'admin_init', function () {
     register_setting( 'ok_lp_settings', 'ok_lp_content', [ 'type'=>'array', 'sanitize_callback'=>'ok_lp_sanitize', 'default'=>ok_lp_defaults() ] );
@@ -53,8 +87,8 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
         return;
     }
     wp_enqueue_media();
-    wp_enqueue_script( 'ok-lp-admin', get_theme_file_uri( 'assets/js/admin.js' ), [ 'media-views' ], '1.0.0', true );
-    wp_enqueue_style( 'ok-lp-admin', get_theme_file_uri( 'assets/css/admin.css' ), [], '1.0.0' );
+    wp_enqueue_script( 'ok-lp-admin', get_theme_file_uri( 'assets/js/admin.js' ), [ 'media-views' ], '1.2.0', true );
+    wp_enqueue_style( 'ok-lp-admin', get_theme_file_uri( 'assets/css/admin.css' ), [], '1.2.0' );
 } );
 function ok_lp_setting_fields( $values, $path ) {
     $labels = ok_lp_labels();
@@ -63,6 +97,12 @@ function ok_lp_setting_fields( $values, $path ) {
         $id = 'ok-' . preg_replace( '/[^a-zA-Z0-9_-]/', '-', $name );
         $label = is_int( $key ) ? ( $key + 1 ) . '件目' : ( $labels[$key] ?? $key );
         if ( is_array( $value ) ) {
+            foreach ( ok_lp_dynamic_lists() as [ $section, $list_key ] ) {
+                if ( 'ok_lp_content[' . $section . '][' . $list_key . ']' === $name ) {
+                    ok_lp_repeater( $value, $name, $section, $list_key );
+                    continue 2;
+                }
+            }
             echo '<fieldset class="ok-group"><legend>' . esc_html( $label ) . '</legend>';
             ok_lp_setting_fields( $value, $name );
             echo '</fieldset>';
