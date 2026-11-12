@@ -6,7 +6,7 @@
 defined( 'ABSPATH' ) || exit;
 return [
     'general' => [
-        'site_name' => '大館　からだの調律時間',
+        'site_name' => '大館 からだの調律時間',
         'tagline' => '心もほぐれる、やさしい体操教室',
         'description' => '秋田県大館市の体操教室。ひめトレ®による骨盤底筋トレーニングや、姿勢・呼吸を意識した運動を自分のペースで楽しめます。',
         'line_url' => '',

@@ -38,7 +38,7 @@ const server = require('child_process').spawn('C:/xampp/php/php.exe',['-S','127.
  console.log('Actual WordPress login, settings save, front-end update: PASS');
  await page.goto(base+'/wp-admin/themes.php?page=ok-lp');
  await page.locator('.ok-section').first().locator('summary').first().click();
- await page.locator('textarea[name="ok_lp_content[general][site_name]"]').fill('大館　からだの調律時間');
+ await page.locator('textarea[name="ok_lp_content[general][site_name]"]').fill('大館 からだの調律時間');
  await page.locator('input[name="ok_lp_content[general][line_url]"]').fill('');
  await Promise.all([page.waitForURL('**/themes.php?page=ok-lp&settings-updated=true'),page.locator('#submit').click()]);
  if(errors.length)throw Error(errors.join('\n'));
