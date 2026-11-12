@@ -149,7 +149,7 @@ function ok_lp_trial_price() {
  * 画像の選択（代替テキストを含む）・公式LINE・キャンペーンの表示有無は引き継ぐ。
  * 置き換え前の設定は ok_lp_content_backup_1_0 に保存する。
  */
-const OK_LP_CONTENT_VERSION = '1.2.0';
+const OK_LP_CONTENT_VERSION = '1.3.0';
 /**
  * 1.2.0：参加者の声がサンプルのまま（未編集）なら、実際の感想に置き換え、サンプルの注記を消す。
  * 管理画面で書き換え済みの感想には触れない。
@@ -163,6 +163,19 @@ function ok_lp_migrate_voices( $saved ) {
     $note = (string) ( $saved['voices']['note'] ?? '' );
     if ( false !== strpos( $note, 'サンプル' ) ) {
         $saved['voices']['note'] = '';
+    }
+    return $saved;
+}
+/**
+ * 1.3.0：教室名とキャッチコピーが旧い初期値のまま（未編集）なら、新しい初期値に置き換える。
+ */
+function ok_lp_migrate_brand( $saved ) {
+    $defaults = ok_lp_defaults()['general'];
+    $old      = [ 'site_name' => '大館からだ時間', 'tagline' => '骨盤まわりから、のびのび体操' ];
+    foreach ( $old as $key => $value ) {
+        if ( isset( $saved['general'][$key] ) && $value === $saved['general'][$key] ) {
+            $saved['general'][$key] = $defaults[$key];
+        }
     }
     return $saved;
 }
@@ -199,6 +212,9 @@ add_action( 'init', function () {
         }
         if ( version_compare( $version, '1.2.0', '<' ) ) {
             $saved = ok_lp_migrate_voices( $saved );
+        }
+        if ( version_compare( $version, '1.3.0', '<' ) ) {
+            $saved = ok_lp_migrate_brand( $saved );
         }
         update_option( 'ok_lp_content', $saved );
     }

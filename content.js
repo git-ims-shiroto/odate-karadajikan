@@ -1,5 +1,5 @@
 window.LP_CONTENT = {
-  siteName: "大館からだ時間",
+  siteName: "大館　からだの調律時間",
   concerns: [
     { icon: "ひ", title: "ひさしぶりの運動を、自分のペースで始めたい" },
     { icon: "め", title: "めりはりのある毎日のために、身体を動かしたい" },
