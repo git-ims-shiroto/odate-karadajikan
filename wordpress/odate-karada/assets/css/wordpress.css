@@ -25,9 +25,13 @@ a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px 
 .campaign { max-width: 100%; }
 .price-card strong { font-size: 44px; }
 .price-options { flex-wrap: wrap; }
-.class-row { margin-bottom: 14px; }
 .class-row h4 { margin: 0 0 3px; font-size: 19px; }
-.class-venue { font-weight: 700; }
+/* 曜日タブ：JS 無効時は全曜日を縦に並べ、曜日名を見出しとして出す。 */
+.schedule-wrap:not(.is-tabbed) .schedule-panel { margin-bottom: 16px; border-radius: 16px; }
+.schedule-day-label { margin: 0; color: var(--primary-dark); font-weight: 800; }
+.schedule-wrap.is-tabbed .schedule-day-label { display: none; }
+.schedule-panel[hidden] { display: none; }
+.schedule-tab:focus-visible { outline: 3px solid #165da0; outline-offset: -3px; }
 .venue-card a { min-height: 48px; }
 .faq-item summary { display: grid; grid-template-columns: 40px 1fr 30px; align-items: center; padding: 17px 18px; cursor: pointer; font-weight: 700; min-height: 60px; list-style: none; }
 .faq-item summary::-webkit-details-marker { display: none; }
@@ -36,7 +40,6 @@ a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px 
 .faq-item[open] summary::after { content: '−'; }
 .faq-item[open] .faq-answer { display: block; }
 .trial-card h3 { margin: 0 0 18px; font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.4; }
-.trial-card .campaign { width: 100%; text-align: left; }
 .trial-standard-price { font-weight: 700; }
 .line-qr { width: min(240px, 100%); margin: 24px auto; }
 .line-qr img { object-fit: contain; background: #fff; }

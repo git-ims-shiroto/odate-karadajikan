@@ -60,3 +60,22 @@ function ok_lp_campaign() {
         echo '<p class="trial-standard-price">' . esc_html( $campaign['normal_price'] ) . '</p>';
     }
 }
+/** 体験カード用のキャンペーン表示（モックの trial-price と同じ構造）。オファーの最後の語を大きく表示する。 */
+function ok_lp_trial_price() {
+    $campaign = ok_lp_content()['campaign'];
+    if ( ! $campaign['enabled'] ) {
+        echo '<p class="trial-standard-price">' . esc_html( $campaign['normal_price'] ) . '</p>';
+        return;
+    }
+    $offer = trim( (string) $campaign['offer'] );
+    $pos = strrpos( $offer, ' ' ); // 半角スペースは1バイトなのでUTF-8でも安全
+    $lead = false === $pos ? '' : substr( $offer, 0, $pos );
+    $main = false === $pos ? $offer : substr( $offer, $pos + 1 );
+    $small = implode( '／', array_filter( [ $campaign['normal_price'], $campaign['period'] ] ) );
+    echo '<div class="trial-price"><span class="campaign-label"><i aria-hidden="true">🎁</i> ' . esc_html( $campaign['label'] ) . '</span>';
+    echo '<strong>' . ( '' !== $lead ? esc_html( $lead ) . ' ' : '' ) . '<b>' . esc_html( $main ) . '</b></strong>';
+    if ( $small ) {
+        echo '<small>' . esc_html( $small ) . '</small>';
+    }
+    echo '</div>';
+}
