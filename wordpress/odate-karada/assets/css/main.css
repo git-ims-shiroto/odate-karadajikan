@@ -326,11 +326,11 @@ body.modal-open { overflow: hidden; }
 .section-lessons::after { top: 36px; right: 5%; width: 170px; transform: scaleX(-1) rotate(-22deg); }
 .section-voices::before { top: 30px; left: 6%; width: 120px; transform: rotate(18deg); }
 .section-instructor::after { right: 3%; bottom: 24px; width: 130px; transform: scaleX(-1) rotate(32deg); }
-.section-schedule::before { top: 40px; right: 6%; width: 140px; transform: rotate(24deg); }
+.section-schedule::before { top: 40px; left: 6%; width: 140px; transform: rotate(-24deg); }
 @media (max-width: 640px) {
   .section-for::before, .section-lessons::after, .section-voices::before, .section-instructor::after, .section-schedule::before { width: 78px; opacity: .45; }
   .section-for::before { top: 18px; left: 2%; }
   .section-lessons::after { top: 14px; right: 2%; }
-  .section-schedule::before { top: 18px; right: 2%; }
+  .section-schedule::before { top: 18px; left: 2%; }
   .section-voices::before, .section-instructor::after { display: none; }
 }

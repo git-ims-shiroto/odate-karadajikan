@@ -14,11 +14,11 @@ add_action( 'after_setup_theme', function () {
 } );
 add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style( 'odate-karada-fonts', 'https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap', [], null );
-    wp_enqueue_style( 'odate-karada', get_theme_file_uri( 'assets/css/main.css' ), [ 'odate-karada-fonts' ], '1.1.1' );
-    wp_enqueue_style( 'odate-karada-wordpress', get_theme_file_uri( 'assets/css/wordpress.css' ), [ 'odate-karada' ], '1.1.1' );
+    wp_enqueue_style( 'odate-karada', get_theme_file_uri( 'assets/css/main.css' ), [ 'odate-karada-fonts' ], '1.1.2' );
+    wp_enqueue_style( 'odate-karada-wordpress', get_theme_file_uri( 'assets/css/wordpress.css' ), [ 'odate-karada' ], '1.1.2' );
     if ( ok_lp_is_landing() ) {
-        wp_enqueue_script( 'odate-karada-site-modal', get_theme_file_uri( 'assets/js/site-modal.js' ), [], '1.1.1', [ 'in_footer' => true, 'strategy' => 'defer' ] );
-        wp_enqueue_script( 'odate-karada-schedule-tabs', get_theme_file_uri( 'assets/js/schedule-tabs.js' ), [], '1.1.1', [ 'in_footer' => true, 'strategy' => 'defer' ] );
+        wp_enqueue_script( 'odate-karada-site-modal', get_theme_file_uri( 'assets/js/site-modal.js' ), [], '1.1.2', [ 'in_footer' => true, 'strategy' => 'defer' ] );
+        wp_enqueue_script( 'odate-karada-schedule-tabs', get_theme_file_uri( 'assets/js/schedule-tabs.js' ), [], '1.1.2', [ 'in_footer' => true, 'strategy' => 'defer' ] );
     }
 } );
 add_filter( 'document_title_parts', function ( $parts ) {
