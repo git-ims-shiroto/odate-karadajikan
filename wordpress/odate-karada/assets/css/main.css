@@ -369,3 +369,14 @@ body.modal-open { overflow: hidden; }
   .mobile-cta { padding: 9px 12px calc(9px + env(safe-area-inset-bottom)); }
   .mobile-cta .button { width: 100%; }
 }
+
+/* 見出しの折り返し：1〜2文字だけ次の行に落ちないようにする。
+   ・行の長さをそろえて折り返す（balance）。Chrome では日本語の文節で区切る（auto-phrase）。
+   ・スマホでは画面幅に合わせて文字を少し小さくし、よく使われる幅（360〜430px）で1行に収める。 */
+h1, h2, h3, h4 { text-wrap: balance; word-break: auto-phrase; }
+@media (max-width: 640px) {
+  .section-heading h2, .section h2 { font-size: clamp(24px, 6.8vw, 31px); }
+  .lesson-intro h3 { font-size: clamp(22px, 6.8vw, 28px); }
+  .reassurance h3 { font-size: clamp(20px, 5.6vw, 25px); }
+  .method-card h4 { font-size: clamp(18px, 6vw, 22px); }
+}
