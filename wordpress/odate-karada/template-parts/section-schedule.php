@@ -6,8 +6,10 @@ foreach ( $lp['schedules'] as $item ) {
 }
 ?>
 <section class="section section-schedule" id="schedule" aria-labelledby="schedule-title">
-    <?php ok_lp_heading( 'schedule-title', 'PRICE & SCHEDULE', $s['title'] ); ?>
-    <div class="price-card"><div class="price-main"><span><?php echo esc_html( $s['label'] ); ?></span><strong><?php echo esc_html( $s['amount'] ); ?></strong><small><?php echo esc_html( $s['frequency'] ); ?></small></div>
+    <?php ok_lp_heading( 'schedule-title', 'PRICE & SCHEDULE', $s['title'], $s['lead'] ); ?>
+    <div class="price-card"><div class="price-main"><span><?php echo esc_html( $s['label'] ); ?></span><strong><b><?php echo esc_html( $s['amount'] ); ?></b><?php echo esc_html( $s['unit'] ); ?> <small><?php echo esc_html( $s['frequency'] ); ?></small></strong>
+        <?php if ( $s['addon_label'] || $s['addon_amount'] ) : ?><p><?php echo esc_html( $s['addon_label'] ); ?> <b><?php echo esc_html( $s['addon_amount'] ); ?></b></p><?php endif; ?>
+        <?php if ( $s['total_amount'] ) : ?><p class="price-total"><?php echo esc_html( $s['total_label'] ); ?> <b><?php echo esc_html( $s['total_amount'] ); ?></b></p><?php endif; ?></div>
     <ul><?php foreach ( $s['notes'] as $item ) : ?><li><?php echo esc_html( $item ); ?></li><?php endforeach; ?></ul>
     <div class="price-options"><?php foreach ( $s['extras'] as $item ) : ?><span><?php echo esc_html( $item ); ?></span><?php endforeach; ?></div></div>
     <div class="schedule-wrap" data-schedule-tabs>

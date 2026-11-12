@@ -16,6 +16,10 @@ try {
     $clean = ok_lp_sanitize( [ 'general'=>[ 'site_name'=>'<script>alert(1)</script><b>体操</b>' ], 'extra'=>'not allowed' ] );
     check_theme( '体操' === $clean['general']['site_name'] && ! isset( $clean['extra'] ), 'Strip HTML and unknown keys' );
     check_theme( count( $clean['schedules'] ) === 5, 'Partial submissions retain schedules' );
+    check_theme( '' === ok_lp_video_id( '"><script>' ) && '8-LBeJjE_KA' === ok_lp_video_id( '8-LBeJjE_KA' ), 'YouTube ID allows only safe characters' );
+    check_theme( '' === ok_lp_https_url( 'javascript:alert(1)' ) && '' === ok_lp_https_url( 'http://example.com/' ), 'Method links require HTTPS' );
+    $carried = ok_lp_carry_settings( ok_lp_defaults(), [ 'general'=>[ 'line_url'=>'https://lin.ee/x', 'site_name'=>'旧' ], 'hero'=>[ 'photo'=>[ 'image_id'=>12, 'alt'=>'旧alt', 'image_note'=>'' ], 'title'=>'旧' ], 'campaign'=>[ 'enabled'=>false ] ] );
+    check_theme( 'https://lin.ee/x' === $carried['general']['line_url'] && 12 === $carried['hero']['photo']['image_id'] && '旧alt' === $carried['hero']['photo']['alt'] && false === $carried['campaign']['enabled'] && '旧' !== $carried['hero']['title'] && '旧' !== $carried['general']['site_name'], 'Migration keeps images, LINE and campaign toggle; resets copy' );
     $input = ok_lp_defaults();
     $input['hero']['photo']['image_id'] = 999999;
     $input['campaign']['enabled'] = '0';
@@ -24,7 +28,7 @@ try {
     check_theme( false === $clean['campaign']['enabled'], 'Campaign toggle sanitizes to boolean' );
     update_option( 'ok_lp_content', $clean );
     ob_start(); ok_lp_campaign(); $html = ob_get_clean();
-    check_theme( str_contains( $html, '通常 初回500円' ) && ! str_contains( $html, '無料' ), 'Disabled campaign shows normal price' );
+    check_theme( str_contains( $html, ok_lp_defaults()['campaign']['normal_price'] ) && ! str_contains( $html, '無料' ), 'Disabled campaign shows normal price' );
     ob_start(); ok_lp_photo( ['image_id'=>999999,'alt'=>'<img onerror=alert(1)>','image_note'=>''], '1-1' ); $html=ob_get_clean();
     check_theme( str_contains( $html, 'photo-placeholder' ) && ! str_contains( $html, '<img onerror' ), 'Missing image fallback and escaped alt' );
     $clean['general']['site_name'] = '<script>alert(1)</script>';

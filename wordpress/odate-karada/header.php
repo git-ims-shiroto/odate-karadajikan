@@ -10,8 +10,8 @@
 <?php wp_body_open(); ?>
 <a class="skip-link" href="#main">本文へ移動</a>
 <header class="site-header">
-    <a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-        <span class="brand-mark" aria-hidden="true">体</span>
+    <a class="brand" href="<?php echo esc_url( ok_lp_is_landing() ? '#top' : home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( $lp['general']['site_name'] ); ?> トップへ">
+        <span class="brand-mark"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/logo.png' ) ); ?>" alt="ひめトレ®" width="160" height="160"></span>
         <span><b><?php echo esc_html( $lp['general']['site_name'] ); ?></b><small><?php echo esc_html( $lp['general']['tagline'] ); ?></small></span>
     </a>
     <nav aria-label="ページ内メニュー">

@@ -20,10 +20,9 @@ a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px 
 .instructor-photo { width: 100%; min-width: 0; }
 .instructor-photo > .lp-photo { border-radius: var(--radius); }
 .method-card > .lp-photo { border-radius: 0; }
-#saturdayMethods { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .button { text-align: center; }
 .campaign { max-width: 100%; }
-.price-card strong { font-size: 44px; }
+
 .price-options { flex-wrap: wrap; }
 .class-row h4 { margin: 0 0 3px; font-size: 19px; }
 /* 曜日タブ：JS 無効時は全曜日を縦に並べ、曜日名を見出しとして出す。 */
@@ -46,18 +45,16 @@ a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px 
 .line-qr .image-note { position: static; display: block; }
 .line-qr .lp-photo { overflow: visible; }
 /* Keep explanatory body copy at the instructed 16px minimum. */
-.method-card p,.class-row p,.faq-answer,.price-card ul,.soft-note,.qualification-row,.venue-card p,.saturday-method span,.trial-card > p { font-size: 16px; }
+.method-card p,.class-row p,.faq-answer,.price-card ul,.soft-note,.qualification-row,.venue-card p,.saturday-method span,.trial-card > p:not(.section-kicker):not(.line-placeholder) { font-size: 16px; }
 .standard-content { min-height: 60vh; max-width: 1100px; margin: auto; padding: 64px 24px; }
 .entry-content img { height: auto; }
 .entry-content { font-size: 18px; }
 .entry-content > * { max-width: 100%; }
 @media (max-width: 980px) {
-  #saturdayMethods { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .method-card > .lp-photo { height: 100%; }
 }
 @media (max-width: 640px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
-  #saturdayMethods { grid-template-columns: 1fr; }
   .faq-item summary { grid-template-columns: 32px 1fr 24px; padding: 15px 12px; }
   .hero-copy > .button { padding-left: 12px; padding-right: 12px; }
 }
