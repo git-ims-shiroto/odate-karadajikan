@@ -47,7 +47,9 @@ a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px 
 .entry-content img { height: auto; }
 .entry-content { font-size: 18px; }
 .entry-content > * { max-width: 100%; }
-@media (max-width: 980px) {
+/* タブレットは写真と文章の横並びなので、写真をカードの高さに合わせる。
+   スマホ（縦並び）に効かせると写真がカード全体に広がり、文章が隠れるため、範囲を限定する。 */
+@media (min-width: 641px) and (max-width: 980px) {
   .method-card > .lp-photo { height: 100%; }
 }
 @media (max-width: 640px) {
