@@ -382,3 +382,8 @@ h1, h2, h3, h4, .saturday-box > p { text-wrap: balance; word-break: auto-phrase;
   .method-card h4 { font-size: clamp(18px, 6vw, 22px); }
   .saturday-box > p { font-size: clamp(18px, 5.6vw, 22px); }
 }
+
+/* スクロールアニメーション（reveal.js）：画面に入ったら下からふわっと表示。JS が動いたときだけ隠す。 */
+.reveal-on [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--reveal-delay, 0s); }
+.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal-on [data-reveal] { opacity: 1; transform: none; transition: none; } }
