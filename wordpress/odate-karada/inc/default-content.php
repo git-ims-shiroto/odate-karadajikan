@@ -108,6 +108,7 @@ return [
                 ],
             ],
         ],
+        'saturday_title' => '土曜は道具が週替わり♪',
         'saturday' => [
             [ 'name' => 'ひめトレ®', 'text' => '小さなポールを使い、骨盤まわりの筋肉を意識します。', 'video_id' => '8-LBeJjE_KA' ],
             [ 'name' => 'Stretch-eze®（ストレッチーズ）', 'text' => '伸縮性のある布を使い、身体を支えながら動きます。', 'video_id' => 'tK5VghJ_178' ],

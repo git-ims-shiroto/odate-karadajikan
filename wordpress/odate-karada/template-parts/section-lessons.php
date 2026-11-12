@@ -26,7 +26,7 @@ $resource = function ( $item ) {
         <article class="method-card"><?php ok_lp_photo( $item['photo'] ); ?><div><h4><?php echo esc_html( $item['name'] ); ?></h4><p><?php echo esc_html( $item['text'] ); ?></p><?php $resource( $item ); ?></div></article>
         <?php endforeach; ?>
     </div>
-    <div class="saturday-box"><p><span>★</span> 土曜日のクラス <span>★</span></p><div id="saturdayMethods">
+    <div class="saturday-box"><p><?php echo esc_html( $s['saturday_title'] ); ?></p><div id="saturdayMethods">
         <?php foreach ( $s['saturday'] as $item ) : ?><div class="saturday-method"><b><?php echo esc_html( $item['name'] ); ?></b><span><?php echo esc_html( $item['text'] ); ?></span><?php $resource( $item ); ?></div><?php endforeach; ?>
     </div><small><?php echo esc_html( $s['note'] ); ?></small></div>
 </section>
