@@ -20,3 +20,4 @@ AI生成画像を本番でも使用する場合は、画像の近くに「写真
 
 - `leaf.webp`（420×816・背景透過）：背景に散らす水彩の葉の装飾。テーマの `wordpress/odate-karada/assets/images/leaf.webp` も同じ画像。生成AI画像から背景のもやを除いて切り抜いたもの。
 - `reason-mat.png` / `reason-yen.png` / `reason-stretch.png`（背景透過の線画）：「選ばれる理由」カード01〜03の右下に薄く敷く挿絵。`content.js` の `reasons[].illustration` で指定。
+- `younger.jpg`（3:2・1400×933）：「40代から70代まで」セクションの写真（ひめトレポールを持つ2人の女性）。モック用イメージ。
