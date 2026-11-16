@@ -7,7 +7,7 @@
     <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(item.videoId)}" title="${escapeHtml(item.name)}の紹介動画" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
   ` : item.modalUrl ? `<button class="method-link method-popup" type="button" data-site-modal data-site-url="${escapeHtml(item.modalUrl)}" data-site-title="${escapeHtml(item.linkLabel)}">${escapeHtml(item.linkLabel)} →</button>` : item.url ? `<a class="method-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.linkLabel)} →</a>` : "";
 
-  document.title = `${content.siteName}｜大館市のやさしい体操教室`;
+  document.title = `${content.siteName}｜大館市の体操教室・骨盤底筋トレーニング`;
   $("#brandName").textContent = content.siteName;
 
   $("#concerns").innerHTML = content.concerns.map((item) => `
