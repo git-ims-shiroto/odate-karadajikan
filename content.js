@@ -8,7 +8,7 @@ window.LP_CONTENT = {
   ],
   reasons: [
     { number: "01", illustration: "public/images/reason-mat.png", title: "道具は無料で貸出", text: "ヨガマットやひめトレポールなどを借りられます。数に限りがあるため、事前予約をお願いします。" },
-    { number: "02", illustration: "public/images/reason-yen.png", title: "基本月会費は2,000円", text: "月4回の料金です。Stretch-eze®（ストレッチーズ）に参加する場合は＋500円です。" },
+    { number: "02", illustration: "public/images/reason-yen.png", title: "基本月会費は2,000円", text: "1レッスン90分×月4回の料金です。Stretch-eze®（ストレッチーズ）に参加する場合は＋500円です。" },
     { number: "03", illustration: "public/images/reason-stretch.png", title: "自分のペースで参加", text: "年代や体力にあわせて、途中で休憩しながら参加できる教室です。" }
   ],
   methods: [

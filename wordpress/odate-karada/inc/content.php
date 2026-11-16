@@ -56,8 +56,14 @@ function ok_lp_cta() {
         echo '<a class="button button-line" href="' . esc_url( ok_lp_anchor( 'line-status' ) ) . '"><span aria-hidden="true">●</span> LINEで体験を申し込む<span class="screen-reader-text">（準備中）</span></a>';
     }
 }
-function ok_lp_photo( $photo, $ratio = '4-3', $size = 'large' ) {
+/**
+ * $fallback：メディアライブラリに画像が未登録のとき表示する、テーマ内の画像（assets/images/ からの相対パス）。
+ */
+function ok_lp_photo( $photo, $ratio = '4-3', $size = 'large', $fallback = '' ) {
     $image = ! empty( $photo['image_id'] ) ? wp_get_attachment_image( absint( $photo['image_id'] ), $size, false, [ 'alt' => $photo['alt'] ] ) : '';
+    if ( ! $image && $fallback ) {
+        $image = '<img src="' . esc_url( get_theme_file_uri( 'assets/images/' . $fallback ) ) . '" alt="' . esc_attr( $photo['alt'] ) . '" loading="lazy" decoding="async">';
+    }
     echo '<figure class="lp-photo ratio-' . esc_attr( $ratio ) . '">';
     if ( $image ) {
         echo $image; // WordPress constructs and escapes attachment markup.
@@ -149,7 +155,7 @@ function ok_lp_trial_price() {
  * 画像の選択（代替テキストを含む）・公式LINE・キャンペーンの表示有無は引き継ぐ。
  * 置き換え前の設定は ok_lp_content_backup_1_0 に保存する。
  */
-const OK_LP_CONTENT_VERSION = '1.3.5';
+const OK_LP_CONTENT_VERSION = '1.3.6';
 /**
  * 1.2.0：参加者の声がサンプルのまま（未編集）なら、実際の感想に置き換え、サンプルの注記を消す。
  * 管理画面で書き換え済みの感想には触れない。
@@ -221,6 +227,23 @@ function ok_lp_migrate_1_3_5( $saved ) {
     }
     return $saved;
 }
+/**
+ * 1.3.6：「40代から70代まで」の写真を、テーマ同梱の写真（assets/images/younger.jpg）に切り替える。
+ * メディアライブラリで選んでいた旧い写真の指定を外す。別の写真にしたい場合は、管理画面で選び直す。
+ * あわせて「選ばれる理由」02の説明文が旧い初期値のままなら、「1レッスン90分×月4回」の文言に置き換える。
+ */
+function ok_lp_migrate_younger_photo( $saved ) {
+    if ( isset( $saved['younger']['photo'] ) && is_array( $saved['younger']['photo'] ) ) {
+        $saved['younger']['photo']['image_id'] = 0;
+    }
+    $old_text = '月4回の料金です。Stretch-eze®（ストレッチーズ）に参加する場合は＋500円です。';
+    foreach ( (array) ( $saved['lessons']['reasons'] ?? [] ) as $i => $item ) {
+        if ( isset( $item['text'] ) && $old_text === $item['text'] ) {
+            $saved['lessons']['reasons'][$i]['text'] = '1レッスン90分×月4回の料金です。Stretch-eze®（ストレッチーズ）に参加する場合は＋500円です。';
+        }
+    }
+    return $saved;
+}
 function ok_lp_carry_settings( $defaults, $saved ) {
     if ( ! is_array( $defaults ) || ! is_array( $saved ) ) {
         return $defaults;
@@ -260,6 +283,9 @@ add_action( 'init', function () {
         }
         if ( version_compare( $version, '1.3.5', '<' ) ) {
             $saved = ok_lp_migrate_1_3_5( $saved );
+        }
+        if ( version_compare( $version, '1.3.6', '<' ) ) {
+            $saved = ok_lp_migrate_younger_photo( $saved );
         }
         update_option( 'ok_lp_content', $saved );
     }
