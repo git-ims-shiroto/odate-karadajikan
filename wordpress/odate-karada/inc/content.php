@@ -149,7 +149,7 @@ function ok_lp_trial_price() {
  * 画像の選択（代替テキストを含む）・公式LINE・キャンペーンの表示有無は引き継ぐ。
  * 置き換え前の設定は ok_lp_content_backup_1_0 に保存する。
  */
-const OK_LP_CONTENT_VERSION = '1.3.3';
+const OK_LP_CONTENT_VERSION = '1.3.5';
 /**
  * 1.2.0：参加者の声がサンプルのまま（未編集）なら、実際の感想に置き換え、サンプルの注記を消す。
  * 管理画面で書き換え済みの感想には触れない。
@@ -176,6 +176,47 @@ function ok_lp_migrate_brand( $saved ) {
     foreach ( $old as $key => $values ) {
         if ( isset( $saved['general'][$key] ) && in_array( $saved['general'][$key], $values, true ) ) {
             $saved['general'][$key] = $defaults[$key];
+        }
+    }
+    return $saved;
+}
+/**
+ * 1.3.5：文言の変更。旧い初期値のまま（未編集）の項目だけ、新しい初期値に置き換える。
+ * 「休みながらで」→「自分のペースで」、月会費の回数表記、合計2,500円の削除、
+ * 90分クラスの名前に「（90分×月4回）」、資格に貯筋運動指導サポーター、40〜70代の写真の代替テキスト。
+ */
+function ok_lp_migrate_1_3_5( $saved ) {
+    $d    = ok_lp_defaults();
+    $swaps = [
+        [ [ 'for_you', 'subtitle' ], '休みながらで、かまいません。', $d['for_you']['subtitle'] ],
+        [ [ 'pricing', 'frequency' ], '（月4回）', $d['pricing']['frequency'] ],
+        [ [ 'pricing', 'total_amount' ], '2,500円', '' ],
+        [ [ 'younger', 'photo', 'alt' ], '明るい室内で、立った姿勢から身体を動かし始める様子のイメージ', $d['younger']['photo']['alt'] ],
+    ];
+    foreach ( $swaps as [ $path, $old, $new ] ) {
+        $ref = &$saved;
+        foreach ( $path as $key ) {
+            if ( ! is_array( $ref ) || ! array_key_exists( $key, $ref ) ) {
+                unset( $ref );
+                continue 2;
+            }
+            $ref = &$ref[$key];
+        }
+        if ( $old === $ref ) {
+            $ref = $new;
+        }
+        unset( $ref );
+    }
+    $old_q = '機能改善体操普及員／ラジオ体操公認指導員／スロージョギング ベーシック資格認定';
+    foreach ( (array) ( $saved['instructor']['qualifications'] ?? [] ) as $i => $item ) {
+        if ( isset( $item['items'] ) && $old_q === $item['items'] ) {
+            $saved['instructor']['qualifications'][$i]['items'] = '機能改善体操普及員／貯筋運動指導サポーター／ラジオ体操公認指導員／スロージョギング ベーシック資格認定';
+        }
+    }
+    $names = [ 'ひめトレ＆セルフコンディショニング', 'ひめトレ・レクリエーション体操サークル', 'セルフコンディショニング（昼の部）', 'セルフコンディショニング（夜の部）' ];
+    foreach ( (array) ( $saved['schedules'] ?? [] ) as $i => $item ) {
+        if ( isset( $item['name'] ) && in_array( $item['name'], $names, true ) ) {
+            $saved['schedules'][$i]['name'] = $item['name'] . '（90分×月4回）';
         }
     }
     return $saved;
@@ -216,6 +257,9 @@ add_action( 'init', function () {
         }
         if ( version_compare( $version, '1.3.3', '<' ) ) {
             $saved = ok_lp_migrate_brand( $saved );
+        }
+        if ( version_compare( $version, '1.3.5', '<' ) ) {
+            $saved = ok_lp_migrate_1_3_5( $saved );
         }
         update_option( 'ok_lp_content', $saved );
     }
