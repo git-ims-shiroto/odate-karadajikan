@@ -230,10 +230,17 @@ function ok_lp_migrate_1_3_5( $saved ) {
 /**
  * 1.3.6：「40代から70代まで」の写真を、テーマ同梱の写真（assets/images/younger.jpg）に切り替える。
  * メディアライブラリで選んでいた旧い写真の指定を外す。別の写真にしたい場合は、管理画面で選び直す。
+ * あわせて「選ばれる理由」02の説明文が旧い初期値のままなら、「1レッスン90分×月4回」の文言に置き換える。
  */
 function ok_lp_migrate_younger_photo( $saved ) {
     if ( isset( $saved['younger']['photo'] ) && is_array( $saved['younger']['photo'] ) ) {
         $saved['younger']['photo']['image_id'] = 0;
+    }
+    $old_text = '月4回の料金です。Stretch-eze®（ストレッチーズ）に参加する場合は＋500円です。';
+    foreach ( (array) ( $saved['lessons']['reasons'] ?? [] ) as $i => $item ) {
+        if ( isset( $item['text'] ) && $old_text === $item['text'] ) {
+            $saved['lessons']['reasons'][$i]['text'] = '1レッスン90分×月4回の料金です。Stretch-eze®（ストレッチーズ）に参加する場合は＋500円です。';
+        }
     }
     return $saved;
 }
