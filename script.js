@@ -16,7 +16,7 @@
 
   const symbols = ["貸", "円", "楽"];
   $("#reasons").innerHTML = content.reasons.map((item, index) => `
-    <article class="reason-card"><span class="reason-number">${escapeHtml(item.number)}</span><span class="reason-symbol" aria-hidden="true">${symbols[index]}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p></article>
+    <article class="reason-card">${item.illustration ? `<img class="reason-illust" src="${escapeHtml(item.illustration)}" alt="" aria-hidden="true" loading="lazy" />` : ""}<span class="reason-number">${escapeHtml(item.number)}</span><span class="reason-symbol" aria-hidden="true">${symbols[index]}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p></article>
   `).join("");
 
   $("#methods").innerHTML = content.methods.map((item) => `

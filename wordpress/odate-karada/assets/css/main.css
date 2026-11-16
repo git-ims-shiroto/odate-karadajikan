@@ -86,6 +86,8 @@ button, summary { font: inherit; }
 .reason-card .reason-symbol { position: relative; display: grid; width: 54px; height: 54px; margin-bottom: 16px; place-items: center; color: #fff; border-radius: 50%; background: var(--primary); font-weight: 800; }
 .reason-card h3 { position: relative; margin: 0 0 8px; font-size: 24px; }
 .reason-card p { position: relative; margin: 0; color: var(--muted); font-size: 16px; }
+.reason-illust { position: absolute; right: -14px; bottom: -14px; width: 132px; height: 132px; object-fit: contain; object-position: right bottom; opacity: .13; pointer-events: none; }
+.reason-card:nth-child(2) .reason-illust { opacity: .09; }
 .lesson-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 34px; }
 .lesson-intro h3 { margin: 5px 0 0; font-size: clamp(28px, 3vw, 40px); line-height: 1.45; }
 .lesson-intro > p { margin: 0; }
@@ -282,6 +284,7 @@ body.modal-open { overflow: hidden; }
   .reassurance h3 { font-size: 25px; }
   .reason-grid { gap: 12px; }
   .reason-card { padding: 28px 22px 24px; }
+  .reason-illust { width: 110px; height: 110px; }
   .lesson-intro { gap: 18px; }
   .method-card { display: block; }
   #saturdayMethods { grid-template-columns: 1fr; }

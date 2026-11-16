@@ -19,3 +19,4 @@
 AI生成画像を本番でも使用する場合は、画像の近くに「写真はイメージです」と明記します。実在する参加者の写真に見える使い方は避けます。
 
 - `leaf.webp`（420×816・背景透過）：背景に散らす水彩の葉の装飾。テーマの `wordpress/odate-karada/assets/images/leaf.webp` も同じ画像。生成AI画像から背景のもやを除いて切り抜いたもの。
+- `reason-mat.png` / `reason-yen.png` / `reason-stretch.png`（背景透過の線画）：「選ばれる理由」カード01〜03の右下に薄く敷く挿絵。`content.js` の `reasons[].illustration` で指定。
