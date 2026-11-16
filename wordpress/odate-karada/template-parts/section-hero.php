@@ -1,8 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit; $lp = $args['lp']; $s = $lp['hero']; ?>
 <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="hero-copy">
-        <p class="eyebrow"><?php echo esc_html( $s['eyebrow'] ); ?></p>
-        <h1 id="hero-title"><span class="hero-title-line"><?php echo ok_lp_lines( $s['title'] ); ?></span><em><?php echo esc_html( $s['accent'] ); ?></em></h1>
+        <h1 id="hero-title"><?php if ( $s['eyebrow'] ) : ?><span class="eyebrow"><?php echo esc_html( $s['eyebrow'] ); ?></span><?php endif; ?><span class="hero-title-line"><?php echo ok_lp_lines( $s['title'] ); ?></span><em><?php echo esc_html( $s['accent'] ); ?></em></h1>
         <p class="hero-lead"><?php echo esc_html( $s['lead'] ); ?></p>
         <?php ok_lp_campaign(); ok_lp_cta(); ?>
         <p class="microcopy"><?php echo esc_html( $s['note'] ); ?></p>
