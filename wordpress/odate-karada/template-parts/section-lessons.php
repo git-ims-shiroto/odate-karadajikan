@@ -17,7 +17,7 @@ $resource = function ( $item ) {
     <?php ok_lp_heading( 'lessons-title', 'LESSON', $s['title'] ); ?>
     <div class="reason-grid">
         <?php foreach ( $s['reasons'] as $index => $item ) : ?>
-        <article class="reason-card"><span class="reason-number" aria-hidden="true"><?php echo esc_html( $item['number'] ); ?></span><span class="reason-symbol" aria-hidden="true"><?php echo esc_html( [ '貸', '円', '楽' ][$index] ?? '楽' ); ?></span><h3><?php echo esc_html( $item['title'] ); ?></h3><p><?php echo esc_html( $item['text'] ); ?></p></article>
+        <article class="reason-card"><?php $illust = [ 'reason-mat.png', 'reason-yen.png', 'reason-stretch.png' ][$index] ?? ''; if ( $illust ) : ?><img class="reason-illust" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/' . $illust ) ); ?>" alt="" aria-hidden="true" loading="lazy"><?php endif; ?><span class="reason-number" aria-hidden="true"><?php echo esc_html( $item['number'] ); ?></span><span class="reason-symbol" aria-hidden="true"><?php echo esc_html( [ '貸', '円', '楽' ][$index] ?? '楽' ); ?></span><h3><?php echo esc_html( $item['title'] ); ?></h3><p><?php echo esc_html( $item['text'] ); ?></p></article>
         <?php endforeach; ?>
     </div>
     <div class="lesson-intro"><div><?php if ( $s['label'] ) : ?><p class="mini-label"><?php echo esc_html( $s['label'] ); ?></p><?php endif; ?><h3><?php echo ok_lp_lines( $s['subtitle'] ); ?></h3></div><p><?php echo esc_html( $s['lead'] ); ?></p></div>
