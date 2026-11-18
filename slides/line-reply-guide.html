@@ -40,7 +40,10 @@
   .no.sm{width:22px;height:22px;font-size:12px}
 
   /* スマホのイラスト（実機スクショ差替え枠） */
-  .phone{width:196px;height:368px;background:var(--ink);border-radius:26px;padding:9px;flex:none;position:relative}
+  .owner{font-size:15px;font-weight:700;padding:4px 14px;white-space:nowrap;border-radius:var(--radius);margin-bottom:8px}
+  .owner.cus{background:var(--surface);border:1px solid var(--line);color:var(--sub)}
+  .owner.tea{background:var(--accent-deep);color:#fff}
+  .phone{width:196px;height:336px;background:var(--ink);border-radius:26px;padding:9px;flex:none;position:relative}
   .scr{background:#fff;width:100%;height:100%;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;font-size:12px;position:relative}
   .bar{height:20px;flex:none}
   .scr-hd{padding:6px 12px 8px;font-weight:700;font-size:13px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px}
@@ -80,7 +83,7 @@
     <div style="font-size:22px;font-weight:700;color:var(--sub)">公式LINEの見かたと、お返事のしかた</div>
     <div style="margin-top:26px;display:flex;gap:14px;align-items:center">
       <span style="background:var(--accent-tint);padding:8px 16px;border-radius:var(--radius);font-size:16px;font-weight:700">スマホだけでできます</span>
-      <span style="font-size:15px;color:var(--sub)">大館 からだの調律時間（仮）　2026年11月</span>
+      <span style="font-size:15px;color:var(--sub)">大館 からだの調律時間　2026年11月</span>
     </div>
   </div>
   <div style="display:flex;gap:14px;padding:0 56px 34px;justify-content:flex-start">
@@ -166,6 +169,7 @@
       <div class="it"><span class="no">1</span><div><div class="t">まず<br>「初回メッセージ」</div><div class="d">押すと教室にひとこと届き<br>先生とやりとりできる<br>ようになります</div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="owner cus">お客さんのスマホ</div>
       <div class="phone"><div class="scr" data-swap="screens/04-customer.png">
         <div class="bar"></div>
         <div class="scr-hd">大館 からだの調律時間</div>
@@ -199,9 +203,10 @@
       <div class="it"><span class="no">2</span><div><div class="t">LINEのお名前を<br>覚えておく</div><div class="d">STEP 3 でこの名前を<br>探します</div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="owner tea">先生のスマホ ／ いつものLINE</div>
       <div class="phone"><div class="scr" data-swap="screens/05-notice.png">
         <div class="bar"></div>
-        <div class="scr-hd">申込みのお知らせ</div>
+        <div class="scr-hd">大館 からだの調律時間</div>
         <div class="chat">
           <div class="bub" style="max-width:92%">【体験の申込み】<br>お名前：大館 花子<br>LINEの名前：はなこ<br>希望：木曜 13:30</div>
         </div>
@@ -212,7 +217,7 @@
       <div class="demo">※ 画面はイメージ・文面は仮です</div>
     </div>
     <div class="ann" style="width:270px">
-      <div class="it"><span class="no">3</span><div><div class="t">ここは「お知らせ」だけ</div><div class="d">ここに返事を書いても<br>お客さんには届きません</div></div></div>
+      <div class="it"><span class="no">3</span><div><div class="t">教室の公式LINEから<br>いつものLINEに届きます</div><div class="d">ここは「お知らせ」だけです<br>ここに返事を書いても<br>お客さんには届きません</div></div></div>
     </div>
   </div>
   <div class="pn">5 / 9</div>
@@ -224,7 +229,7 @@
   <div class="bd" style="gap:24px;padding-top:22px;align-items:flex-start">
     <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;display:flex;flex-direction:column;gap:14px">
       <div style="display:flex;gap:16px;align-items:center">
-        <svg width="64" height="64" viewBox="0 0 64 64" style="flex:none"><rect width="64" height="64" rx="14" fill="var(--accent)"/><g transform="translate(16 16)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></g></svg>
+        <img src="assets/line-icon.png" alt="LINEアプリのアイコン" width="64" height="64" style="flex:none;display:block">
         <div><div style="font-size:15px;color:var(--sub);font-weight:700">ふだん使っている</div><div style="font-size:26px;font-weight:700">いつものLINE</div></div>
       </div>
       <div style="font-size:18px;line-height:1.8">・家族や友だちとのやりとり<br>・申込みの<b>お知らせ</b>が届く</div>
@@ -239,7 +244,7 @@
       <div style="font-size:19px;font-weight:700;color:var(--accent-on-dark);border-top:1px solid var(--line-on-dark);padding-top:14px">◯　お返事はこちらから</div>
     </div>
   </div>
-  <div style="position:absolute;bottom:16px;left:56px" class="note">※ アイコンはイメージです。実際のアイコンは先生のスマホの画面写真で差し替えます</div>
+  <div style="position:absolute;bottom:16px;left:56px" class="note">※ 右のアイコンはイメージです</div>
   <div class="pn">6 / 9</div>
 </div>
 
@@ -252,6 +257,7 @@
       <div class="it"><span class="no">2</span><div><div class="t">お知らせと同じ<br>お名前の人を押す</div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="owner tea">先生のスマホ ／ 公式LINEアプリ</div>
       <div class="phone"><div class="scr" data-swap="screens/07-chat-list.png">
         <div class="bar"></div>
         <div class="scr-hd">チャット</div>
@@ -290,6 +296,7 @@
       <div class="it"><span class="no">2</span><div><div class="t">右の送信を押す</div><div class="d">紙ひこうきの形の<br>ボタンです</div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="owner tea">先生のスマホ ／ 公式LINEアプリ</div>
       <div class="phone"><div class="scr" data-swap="screens/08-reply.png">
         <div class="bar"></div>
         <div class="scr-hd">はなこ</div>
