@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>体験の申込みが届いたら｜公式LINEの見かた・返し方</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F3EA; --surface:#FFFFFF; --ink:#232323; --sub:#5C594F; --dim:#8a8474; --line:#ded7c6;
+    --accent:#1E8A3C; --accent-deep:#14682C; --accent-tint:#E3EFE4;
+    --spark:#FFD84D;
+    --ink-surface:#232323; --on-dark:#F6F3EA; --accent-on-dark:#52c46e; --line-on-dark:#3d3d3d;
+    --radius:4px;
+    --ff:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+    --ff-en:"Manrope","Helvetica Neue",Arial,sans-serif;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);overflow:hidden;width:100vw;height:100vh}
+  .s{
+    position:absolute;top:50%;left:50%;width:960px;height:540px;
+    transform:translate(-50%,-50%) scale(var(--k,1));transform-origin:center center;
+    background:var(--bg);color:var(--ink);font-family:var(--ff);
+    visibility:hidden;opacity:0;display:flex;flex-direction:column;box-sizing:border-box;
+  }
+  .s.active{visibility:visible;opacity:1}
+  .s *{box-sizing:border-box}
+  .pn{position:absolute;bottom:18px;right:22px;font-family:var(--ff-en);font-size:12px;color:var(--dim);font-weight:700}
+  .hd{padding:30px 56px 0}
+  .ki{font-family:var(--ff-en);font-size:11px;letter-spacing:.14em;color:var(--dim);font-weight:800;margin-bottom:6px}
+  .ki b{color:var(--accent-deep)}
+  h2{font-size:32px;font-weight:700;margin:0;line-height:1.35}
+  .rule{height:1px;background:var(--line);margin-top:14px}
+  .bd{flex:1;padding:18px 56px 34px;position:relative;display:flex}
+  .note{font-size:12px;color:var(--sub)}
+
+  /* 番号バッジ（画面の中と説明を同じ番号で結ぶ） */
+  .no{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;
+      background:var(--accent-deep);color:#fff;font-family:var(--ff-en);font-weight:800;font-size:15px;flex:none}
+  .no.sm{width:22px;height:22px;font-size:12px}
+
+  /* スマホのイラスト（実機スクショ差替え枠） */
+  .phone{width:196px;height:368px;background:var(--ink);border-radius:26px;padding:9px;flex:none;position:relative}
+  .scr{background:#fff;width:100%;height:100%;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;font-size:12px;position:relative}
+  .bar{height:20px;flex:none}
+  .scr-hd{padding:6px 12px 8px;font-weight:700;font-size:13px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px}
+  .chat{flex:1;background:var(--bg);padding:10px 10px;display:flex;flex-direction:column;gap:8px}
+  .bub{max-width:82%;padding:7px 9px;border-radius:12px;line-height:1.5;font-size:12px;background:#fff;border:1px solid var(--line)}
+  .bub.me{align-self:flex-end;background:var(--accent-tint);border-color:var(--accent-tint)}
+  .tag{position:absolute;z-index:2}
+  .demo{font-size:12px;color:var(--sub);text-align:center;margin-top:8px}
+
+  /* 説明の列 */
+  .ann{display:flex;flex-direction:column;gap:22px;justify-content:center}
+  .ann .it{display:flex;gap:12px;align-items:flex-start}
+  .ann .t{font-size:19px;font-weight:700;line-height:1.5}
+  .ann .d{font-size:16px;color:var(--sub);line-height:1.7;margin-top:2px}
+</style>
+</head>
+<body>
+<!-- kit:slide-zukai-kit v1.1 theme:D use:internal style:visual viz:high -->
+
+<!-- 1 表紙（型 H ドット帯） -->
+<div class="s active">
+  <div style="display:flex;gap:14px;padding:34px 56px 0">
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-deep)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-tint)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-tint)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-tint)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 56px">
+    <div class="ki">GUIDE ／ 講師用</div>
+    <h1 style="font-size:60px;font-weight:900;line-height:1.25;margin:6px 0 18px">体験の申込みが<br>届いたら</h1>
+    <div style="font-size:22px;font-weight:700;color:var(--sub)">公式LINEの見かたと、お返事のしかた</div>
+    <div style="margin-top:26px;display:flex;gap:14px;align-items:center">
+      <span style="background:var(--accent-tint);padding:8px 16px;border-radius:var(--radius);font-size:16px;font-weight:700">スマホだけでできます</span>
+      <span style="font-size:15px;color:var(--sub)">大館 からだの調律時間（仮）　2026年11月</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:14px;padding:0 56px 34px;justify-content:flex-start">
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--line)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-tint)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-tint)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-tint)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+    <span style="width:14px;height:14px;border-radius:50%;background:var(--accent-deep)"></span>
+  </div>
+  <div class="pn">1 / 9</div>
+</div>
+
+<!-- 2 結論：やることは3つ -->
+<div class="s">
+  <div class="hd"><div class="ki">まずはここだけ</div><h2>先生がやることは3つだけ</h2><div class="rule"></div></div>
+  <div class="bd" style="flex-direction:column;gap:26px;padding-top:30px">
+    <div style="display:flex;align-items:stretch;gap:10px">
+      <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 24px">
+        <div style="font-family:var(--ff-en);font-weight:800;font-size:46px;color:var(--accent-deep);line-height:1">1</div>
+        <div style="font-size:23px;font-weight:700;margin:12px 0 8px;min-height:1.5em">お知らせに気づく</div>
+        <div style="font-size:17px;color:var(--sub);line-height:1.7">いつものLINEに<br>「新しいメッセージ」の<br>お知らせが届きます</div>
+      </div>
+      <div style="display:flex;align-items:center;font-size:30px;color:var(--accent-deep);font-weight:700">→</div>
+      <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 24px">
+        <div style="font-family:var(--ff-en);font-weight:800;font-size:46px;color:var(--accent-deep);line-height:1">2</div>
+        <div style="font-size:23px;font-weight:700;margin:12px 0 8px;min-height:1.5em">公式LINEを開く</div>
+        <div style="font-size:17px;color:var(--sub);line-height:1.7">いつものLINEとは別の<br>「LINE公式アカウント」<br>アプリです</div>
+      </div>
+      <div style="display:flex;align-items:center;font-size:30px;color:var(--accent-deep);font-weight:700">→</div>
+      <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 24px">
+        <div style="font-family:var(--ff-en);font-weight:800;font-size:46px;color:var(--accent-deep);line-height:1">3</div>
+        <div style="font-size:23px;font-weight:700;margin:12px 0 8px;min-height:1.5em">読んでお返事する</div>
+        <div style="font-size:17px;color:var(--sub);line-height:1.7">「チャット」から<br>申込みのトークを開き<br>文字を打って送ります</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;font-size:21px;font-weight:700">
+      <span style="color:var(--accent-deep)">大事なこと</span>
+      <span>お客さんへのお返事は　必ず<span style="background:var(--spark);padding:2px 8px;margin:0 4px">公式LINEアプリ</span>から</span>
+    </div>
+  </div>
+  <div class="pn">2 / 9</div>
+</div>
+
+<!-- 3 全体の流れ：お客さん → 先生 -->
+<div class="s">
+  <div class="hd"><div class="ki">ぜんたいの流れ</div><h2>お客さんの動きと先生の動き</h2><div class="rule"></div></div>
+  <div class="bd" style="padding-top:16px">
+    <div style="flex:1;display:grid;grid-template-columns:1fr 150px 1fr;grid-template-rows:30px repeat(7,40px);row-gap:7px;column-gap:0;font-size:17px;font-weight:700">
+      <div style="grid-column:1;grid-row:1;font-size:15px;color:var(--sub)">お客さん（スマホ）</div>
+      <div style="grid-column:3;grid-row:1;font-size:15px;color:var(--accent-deep)">先生（スマホ）</div>
+
+      <div style="grid-column:1;grid-row:2;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:flex;align-items:center;padding:0 16px">ホームページを見る</div>
+      <div style="grid-column:1;grid-row:3;text-align:center;color:var(--dim);font-size:16px;line-height:40px">↓</div>
+      <div style="grid-column:1;grid-row:4;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:flex;align-items:center;padding:0 16px">教室の公式LINEを友だち追加</div>
+      <div style="grid-column:1;grid-row:5;text-align:center;color:var(--dim);font-size:16px;line-height:40px">↓</div>
+      <div style="grid-column:1;grid-row:6;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:flex;align-items:center;padding:0 16px">「体験を申し込む」ボタンを押す</div>
+
+      <div style="grid-column:2;grid-row:6;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--accent-deep);line-height:1.1">
+        <span style="font-size:13px">申込みが届く</span><span style="font-size:24px">→</span>
+      </div>
+
+      <div style="grid-column:3;grid-row:4;background:var(--accent-tint);border-radius:var(--radius);display:flex;align-items:center;gap:10px;padding:0 14px"><span class="no sm">1</span>いつものLINEにお知らせ</div>
+      <div style="grid-column:3;grid-row:5;background:var(--accent-tint);border-radius:var(--radius);display:flex;align-items:center;gap:10px;padding:0 14px"><span class="no sm">2</span>公式LINEアプリを開く</div>
+      <div style="grid-column:3;grid-row:6;background:var(--accent-tint);border-radius:var(--radius);display:flex;align-items:center;gap:10px;padding:0 14px"><span class="no sm">3</span>下の「チャット」を押す</div>
+      <div style="grid-column:3;grid-row:7;background:var(--accent-tint);border-radius:var(--radius);display:flex;align-items:center;gap:10px;padding:0 14px"><span class="no sm">4</span>申込みのトークを開く</div>
+      <div style="grid-column:3;grid-row:8;background:var(--accent-tint);border-radius:var(--radius);display:flex;align-items:center;gap:10px;padding:0 14px"><span class="no sm">5</span>お返事を書いて送る</div>
+    </div>
+  </div>
+  <div class="pn">3 / 9</div>
+</div>
+
+<!-- 4 お客さん側の画面 -->
+<div class="s">
+  <div class="hd"><div class="ki">参考 ／ お客さんの画面</div><h2>お客さんのスマホでの見え方</h2><div class="rule"></div></div>
+  <div class="bd" style="gap:36px;align-items:center;justify-content:center;padding-top:12px">
+    <div class="ann" style="width:270px">
+      <div class="it"><span class="no">1</span><div><div class="t">友だち追加すると<br>あいさつが自動で届く</div><div class="d">教室からの<br>最初のメッセージです</div></div></div>
+      <div class="it"><span class="no">2</span><div><div class="t">お客さんがボタンを押す</div><div class="d">文字を打たなくても<br>申込みができます</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="phone"><div class="scr" data-swap="screens/04-customer.png">
+        <div class="bar"></div>
+        <div class="scr-hd">大館 からだの調律時間</div>
+        <div class="chat">
+          <div class="bub">友だち追加ありがとうございます。体験のお申込みは、下のボタンを押してください。
+            <div style="margin-top:7px;border:1px solid var(--accent-deep);color:var(--accent-deep);text-align:center;padding:5px 0;border-radius:var(--radius);font-weight:700;position:relative">体験を申し込む</div>
+          </div>
+          <div class="bub me">体験に申し込みたいです</div>
+        </div>
+        <span class="no sm tag" style="top:64px;right:6px">1</span>
+        <span class="no sm tag" style="top:166px;left:2px">2</span>
+        <span class="no sm tag" style="top:236px;left:14px">3</span>
+      </div></div>
+      <div class="demo">※ 画面はイメージ・文面は仮です</div>
+    </div>
+    <div class="ann" style="width:270px">
+      <div class="it"><span class="no">3</span><div><div class="t">この一言が<br>先生に届きます</div><div class="d">これが「体験の申込み」の<br>合図です</div></div></div>
+    </div>
+  </div>
+  <div class="pn">4 / 9</div>
+</div>
+
+<!-- 5 STEP1 お知らせ -->
+<div class="s">
+  <div class="hd"><div class="ki"><b>STEP 1</b>　お知らせに気づく</div><h2>いつものLINEに届くお知らせ</h2><div class="rule"></div></div>
+  <div class="bd" style="gap:36px;align-items:center;justify-content:center;padding-top:12px">
+    <div class="ann" style="width:270px">
+      <div class="it"><span class="no">1</span><div><div class="t">「LINE公式アカウント」<br>からのお知らせ</div><div class="d">申込みがあると<br>ここにトークが届きます</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="phone"><div class="scr" data-swap="screens/05-notice.png">
+        <div class="bar"></div>
+        <div class="scr-hd">トーク</div>
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div style="display:flex;gap:8px;align-items:center;padding:10px 10px;border-bottom:1px solid var(--line);background:var(--accent-tint)">
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--accent);flex:none"></span>
+            <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:12px">LINE公式アカウント</div><div style="color:var(--sub);font-size:12px;line-height:1.4">新しいメッセージが届いています</div></div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--line)"><span style="width:30px;height:30px;border-radius:50%;background:var(--line);flex:none"></span><div style="flex:1"><div style="height:8px;width:60%;background:var(--line);border-radius:var(--radius)"></div><div style="height:8px;width:85%;background:var(--line);border-radius:var(--radius);margin-top:6px"></div></div></div>
+          <div style="display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--line)"><span style="width:30px;height:30px;border-radius:50%;background:var(--line);flex:none"></span><div style="flex:1"><div style="height:8px;width:50%;background:var(--line);border-radius:var(--radius)"></div><div style="height:8px;width:75%;background:var(--line);border-radius:var(--radius);margin-top:6px"></div></div></div>
+        </div>
+        <span class="no sm tag" style="top:36px;right:6px">1</span>
+      </div></div>
+      <div class="demo">※ 画面はイメージ・文面は仮です</div>
+    </div>
+    <div class="ann" style="width:270px">
+      <div class="it"><span class="no">2</span><div><div class="t">ここは「お知らせ」だけ</div><div class="d">ここに返事を書いても<br>お客さんには届きません</div></div></div>
+      <div class="it"><span class="no">3</span><div><div class="t">気づいたら STEP 2 へ</div><div class="d">公式LINEアプリを開きます</div></div></div>
+    </div>
+  </div>
+  <div class="pn">5 / 9</div>
+</div>
+
+<!-- 6 STEP2 2つのアプリ（対比） -->
+<div class="s">
+  <div class="hd"><div class="ki"><b>STEP 2</b>　公式LINEアプリを開く</div><h2>いつものLINEと公式LINEは別のアプリ</h2><div class="rule"></div></div>
+  <div class="bd" style="gap:24px;padding-top:22px;align-items:flex-start">
+    <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:16px;align-items:center">
+        <svg width="64" height="64" viewBox="0 0 64 64" style="flex:none"><rect width="64" height="64" rx="14" fill="var(--accent)"/><g transform="translate(16 16)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></g></svg>
+        <div><div style="font-size:15px;color:var(--sub);font-weight:700">ふだん使っている</div><div style="font-size:26px;font-weight:700">いつものLINE</div></div>
+      </div>
+      <div style="font-size:18px;line-height:1.8">・家族や友だちとのやりとり<br>・申込みの<b>お知らせ</b>が届く</div>
+      <div style="font-size:19px;font-weight:700;color:var(--sub);border-top:1px solid var(--line);padding-top:14px">✕　ここからお返事はできません</div>
+    </div>
+    <div style="flex:1;background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:16px;align-items:center">
+        <svg width="64" height="64" viewBox="0 0 64 64" style="flex:none"><rect width="64" height="64" rx="14" fill="var(--accent)"/><g transform="translate(16 16)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 10h6"/><path d="M12 7v6"/></svg></g></svg>
+        <div><div style="font-size:15px;color:var(--accent-on-dark);font-weight:700">教室用</div><div style="font-size:26px;font-weight:700">LINE公式アカウント</div></div>
+      </div>
+      <div style="font-size:18px;line-height:1.8">・教室としてのやりとり<br>・申込みの<b>中身</b>を読む</div>
+      <div style="font-size:19px;font-weight:700;color:var(--accent-on-dark);border-top:1px solid var(--line-on-dark);padding-top:14px">◯　お返事はこちらから</div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:16px;left:56px" class="note">※ アイコンはイメージです。実際のアイコンは先生のスマホの画面写真で差し替えます</div>
+  <div class="pn">6 / 9</div>
+</div>
+
+<!-- 7 STEP3・4 チャット → トーク -->
+<div class="s">
+  <div class="hd"><div class="ki"><b>STEP 3・4</b>　チャットを開く</div><h2>「チャット」から申込みのトークへ</h2><div class="rule"></div></div>
+  <div class="bd" style="gap:36px;align-items:center;justify-content:center;padding-top:12px">
+    <div class="ann" style="width:270px">
+      <div class="it"><span class="no">1</span><div><div class="t">いちばん下の<br>「チャット」を押す</div><div class="d">お客さんとのトークが<br>ならんでいます</div></div></div>
+      <div class="it"><span class="no">2</span><div><div class="t">印のついた人を押す</div><div class="d">まだ読んでいないトークに<br>緑の丸がつきます</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="phone"><div class="scr" data-swap="screens/07-chat-list.png">
+        <div class="bar"></div>
+        <div class="scr-hd">チャット</div>
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div style="display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--line);background:var(--accent-tint)">
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--line);flex:none"></span>
+            <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:12px">Aさん</div><div style="color:var(--sub);font-size:12px;line-height:1.4">体験に申し込みたいです</div></div>
+            <span style="width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none"></span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--line)"><span style="width:30px;height:30px;border-radius:50%;background:var(--line);flex:none"></span><div style="flex:1"><div style="height:8px;width:55%;background:var(--line);border-radius:var(--radius)"></div><div style="height:8px;width:80%;background:var(--line);border-radius:var(--radius);margin-top:6px"></div></div></div>
+          <div style="display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--line)"><span style="width:30px;height:30px;border-radius:50%;background:var(--line);flex:none"></span><div style="flex:1"><div style="height:8px;width:45%;background:var(--line);border-radius:var(--radius)"></div><div style="height:8px;width:70%;background:var(--line);border-radius:var(--radius);margin-top:6px"></div></div></div>
+        </div>
+        <div style="height:46px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;padding:0 6px">
+          <span style="width:26px;height:8px;background:var(--line);border-radius:var(--radius)"></span>
+          <span style="font-weight:700;font-size:12px;color:var(--accent-deep);border:2px solid var(--accent-deep);padding:3px 6px;border-radius:var(--radius)">チャット</span>
+          <span style="width:26px;height:8px;background:var(--line);border-radius:var(--radius)"></span>
+          <span style="width:26px;height:8px;background:var(--line);border-radius:var(--radius)"></span>
+        </div>
+        <span class="no sm tag" style="bottom:50px;left:60px">1</span>
+        <span class="no sm tag" style="top:56px;right:4px">2</span>
+      </div></div>
+      <div class="demo">※ 画面はイメージです</div>
+    </div>
+    <div class="ann" style="width:270px">
+      <div class="it"><span class="no">3</span><div><div class="t">最初の一言で<br>申込みだと分かります</div><div class="d">「体験に申し込みたいです」<br>と書かれています</div></div></div>
+    </div>
+  </div>
+  <div class="pn">7 / 9</div>
+</div>
+
+<!-- 8 STEP5 お返事 -->
+<div class="s">
+  <div class="hd"><div class="ki"><b>STEP 5</b>　お返事する</div><h2>文字を打って送るだけ</h2><div class="rule"></div></div>
+  <div class="bd" style="gap:30px;align-items:center;justify-content:center;padding-top:12px">
+    <div class="ann" style="width:230px">
+      <div class="it"><span class="no">1</span><div><div class="t">下の枠を押して<br>文字を打つ</div></div></div>
+      <div class="it"><span class="no">2</span><div><div class="t">右の送信を押す</div><div class="d">紙ひこうきの形の<br>ボタンです</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="phone"><div class="scr" data-swap="screens/08-reply.png">
+        <div class="bar"></div>
+        <div class="scr-hd">Aさん</div>
+        <div class="chat">
+          <div class="bub">体験に申し込みたいです</div>
+          <div class="bub me">お申込みありがとうございます。ご希望の曜日を…</div>
+        </div>
+        <div style="height:46px;border-top:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 8px">
+          <div style="flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:6px 8px;color:var(--dim);font-size:12px">メッセージを入力</div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-deep);flex:none"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+        </div>
+        <span class="no sm tag" style="bottom:50px;left:10px">1</span>
+        <span class="no sm tag" style="bottom:50px;right:4px">2</span>
+      </div></div>
+      <div class="demo">※ 画面はイメージです</div>
+    </div>
+    <div style="width:320px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px">
+      <div style="font-size:15px;font-weight:700;color:var(--accent-deep);margin-bottom:10px">お返事の例</div>
+      <div style="font-size:17px;line-height:1.85">お申込みありがとうございます。<br>講師の松田です。<br>ご希望の曜日とクラスを<br>お知らせください。<br>当日お会いできるのを<br>楽しみにしています。</div>
+      <div style="font-size:14px;color:var(--sub);margin-top:12px;border-top:1px solid var(--line);padding-top:10px">言葉はご自分のものに変えて大丈夫です</div>
+    </div>
+  </div>
+  <div class="pn">8 / 9</div>
+</div>
+
+<!-- 9 困ったとき -->
+<div class="s" style="background:var(--surface)">
+  <div class="hd"><div class="ki">こまったときは</div><h2>よくある「困った」と対処</h2><div class="rule"></div></div>
+  <div class="bd" style="flex-direction:column;gap:0;padding-top:4px">
+    <div style="display:grid;grid-template-columns:300px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline">
+      <div style="font-size:20px;font-weight:700">お知らせが来ない</div>
+      <div style="font-size:17px;line-height:1.7;color:var(--sub)">スマホの「設定」で、LINEと公式LINEアプリの<br>通知がオンになっているか確かめます</div>
+    </div>
+    <div style="display:grid;grid-template-columns:300px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline">
+      <div style="font-size:20px;font-weight:700">いつものLINEで<br>返事をしてしまった</div>
+      <div style="font-size:17px;line-height:1.7;color:var(--sub)">お客さんには届いていません。<br>公式LINEアプリから送り直せば大丈夫です</div>
+    </div>
+    <div style="display:grid;grid-template-columns:300px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline">
+      <div style="font-size:20px;font-weight:700">何と書けばいいか迷う</div>
+      <div style="font-size:17px;line-height:1.7;color:var(--sub)">8枚目の「お返事の例」を<br>そのまま打てば大丈夫です</div>
+    </div>
+    <div style="margin-top:20px;margin-right:100px;border:1px dashed var(--line);border-radius:var(--radius);padding:14px 20px;background:var(--bg);display:flex;gap:18px;align-items:center">
+      <div style="font-family:var(--ff-en);font-size:11px;letter-spacing:.14em;color:var(--dim)">TO BE FILLED</div>
+      <div style="font-size:18px;font-weight:700">それでも分からないときの連絡先</div>
+      <div style="font-size:15px;color:var(--sub)">例: 制作担当 ○○（電話・LINE）</div>
+    </div>
+  </div>
+  <div class="pn">9 / 9</div>
+</div>
+
+<script>
+function fit(){document.documentElement.style.setProperty('--k',Math.min(innerWidth/960,innerHeight/540))}
+addEventListener('resize',fit);fit();
+let i=0;const slides=document.querySelectorAll('.s');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((el,j)=>el.classList.toggle('active',j===i))}
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+show(0);
+</script>
+</body>
+</html>
